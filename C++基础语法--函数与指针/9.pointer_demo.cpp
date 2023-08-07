@@ -69,7 +69,7 @@ int main()
     // double high_temp {41.5};                                       
 
     int *score_ptr {nullptr};                                          // 指针变量score_ptr, 值是: 0, 地址是: 5000
-    score_ptr = &student_score;                                        // 将student_score的地址赋值给score_ptr, score_ptr: 值是2000, 地址5000
+    score_ptr = &student_score;                                        // 将student_score的地址赋值给score_ptr, score_ptr: 值是2000(student_score地址), 地址5000
 
     cout << "student_score的值是: " << student_score << endl;           // 100
     cout << "student_score的地址是: " << &student_score << endl;        // 0x7ffda400baa4
@@ -82,7 +82,7 @@ int main()
     // 字符操作及解引用和对指针重新赋值
     cout << "====================" << endl;
     string name {"John"};
-    string *string_ptr = {&name};
+    string *string_ptr = {&name};                      // 先取地址, 后指针解引用运算
 
     cout << *string_ptr << endl;                       // John
 
