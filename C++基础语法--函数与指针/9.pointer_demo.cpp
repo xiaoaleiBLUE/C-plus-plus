@@ -1,3 +1,15 @@
+#/*
+&: 地址操作符
+指针也是一个变量, 所以它的值可以改变
+指针可以为 null
+指针可以不初始化
+
+指针和其他变量没啥区别, 只是指针存储的值是地址, 可以指向其他的数值
+int *score_ptr {nullptr}   定义一个指针变量
+score_ptr: score_ptr变量存储的值
+*score_ptr: score_ptr变量存储的值作为地址所指向的值
+*/
+
 #include<iostream>
 #include<string>
 #include<vector>
@@ -15,7 +27,7 @@ int main()
 
     cout << "my_num变量的 sizeof 是: " << sizeof(my_num) << endl;        // 4
 
-    cout << "my_num变量的地址是: " << &my_num << endl;                   //  0x7ffcd43a4a4c
+    cout << "my_num变量的地址是: " << &my_num << endl;                   //  获取 my_num 的地址: 0x7ffcd43a4a4c
     cout << endl;
 
 
@@ -53,16 +65,16 @@ int main()
 
     cout << "====================" << endl;
 
-    int student_score {100};
-    // double high_temp {41.5};
+    int student_score {100};                                           // 初始化student_score, 值是100, 地址是 2000
+    // double high_temp {41.5};                                       
 
-    int *score_ptr {nullptr};                                          // 初始化值: nullptr(0)
-    score_ptr = &student_score;
+    int *score_ptr {nullptr};                                          // 指针变量score_ptr, 值是: 0, 地址是: 5000
+    score_ptr = &student_score;                                        // 将student_score的地址赋值给score_ptr, score_ptr: 值是2000, 地址5000
 
     cout << "student_score的值是: " << student_score << endl;           // 100
     cout << "student_score的地址是: " << &student_score << endl;        // 0x7ffda400baa4
     cout << "score_ptr的值是: " << score_ptr << endl;                   // 0x7ffda400baa4
-    cout << "*score_ptr的值是: " << *score_ptr << endl;                 // 100
+    cout << "*score_ptr的值是: " << *score_ptr << endl;                 // 100, 输出是: score_ptr的值(作为地址)所指向的数
 
     // score = &high_temp;                                              // 会报错, score_ptr 是 int 类型的指针, 不能指向 double 类型的变量
 
