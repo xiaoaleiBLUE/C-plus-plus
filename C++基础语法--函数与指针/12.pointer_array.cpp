@@ -1,5 +1,13 @@
-#include<iostream>
+/*
+指针和数组的关系(指针名称和数组名称可以是共用的)
 
+下标方式:                               位置偏移方式: 
+array_name[index]                      *(array_name + index)
+
+pointer_name[index]                    *(pointer_name + index)
+
+*/
+#include<iostream>
 
 using namespace std;
 
@@ -8,42 +16,43 @@ int main()
 {
 
     int student_scores [] {100, 98, 99};
-    cout << "student_scores的地址值是: " << student_scores << endl;             // 数组地址: 0x7ffe560146fc
+    cout << "student_scores的地址值是: " << student_scores << endl;              // 数组首地址: 0x7ffe560146fc
 
-    int *score_ptr {student_scores};                                           // score_ptr指向 student_scores 数组的第一个元素地址
-    cout << "score_ptr的值是: " << score_ptr << endl;                          // 数组地址: 0x7fff94350e9c
+    int *score_ptr {student_scores};                                            // score_ptr指向 student_scores 数组的第一个元素地址
+    cout << "score_ptr的值是: " << score_ptr << endl;                           // 输出score_ptr存储的值, 也就是数组地址: 0x7fff94350e9c
 
 
-    cout << "====== 输出每个元素对应的地址值 ======" << endl;
-    cout << score_ptr << endl;                                                // 0x7fff94350e9c
-    cout << score_ptr + 1 << endl;                                            // 0x7fff94350ea0
-    cout << score_ptr +2 << endl;                                             // 0x7fff94350ea4
+    cout << "====== 输出每个元素对应的地址值 ======" << endl;                    // int 占用内存大小: 4
+    cout << score_ptr << endl;                                                 // 0x7fff94350e9c
+    cout << score_ptr + 1 << endl;                                             // 0x7fff94350ea0
+    cout << score_ptr +2 << endl;                                              // 0x7fff94350ea4
 
 
     cout << "====== 数组名称, 下表访问元素 ======" << endl;
-    cout << student_scores[0] << endl;                         // 100
-    cout << student_scores[1] << endl;                         // 98
-    cout << student_scores[2] << endl;                         // 99
+    cout << student_scores[0] << endl;                               // 100
+    cout << student_scores[1] << endl;                               // 98
+    cout << student_scores[2] << endl;                               // 99
 
 
-    cout << "====== 指针名称, 下表访问元素 ======" << endl;     // 指针名称 和 数组名称 等价
-    cout << score_ptr[0] << endl;                             // 100
-    cout << score_ptr[1] << endl;                             // 98
-    cout << score_ptr[2] << endl;                             // 99
+    cout << "====== 指针名称, 下表访问元素 ======" << endl;            // 指针名称 和 数组名称 等价, 都是代表数组的首地址
+    cout << score_ptr[0] << endl;                                    // 100
+    cout << score_ptr[1] << endl;                                    // 98
+    cout << score_ptr[2] << endl;                                    // 99
 
 
     cout << "====== 指针名称, 指针运算符方式访问元素 ======" << endl;
-    cout << *score_ptr << endl;                               // 100
-    cout << *(score_ptr + 1) << endl;                         // 98
-    cout << *(score_ptr + 2) << endl;                         // 99
+    cout << *score_ptr << endl;                                      // 100
+    cout << *(score_ptr + 1) << endl;                                // 98
+    cout << *(score_ptr + 2) << endl;                                // 99
+
     // 对指针进行解引用
-    cout << *score_ptr << endl;                               // 这里解引用还是初始值, 100
+    cout << *score_ptr << endl;                                      // 这里解引用还是初始值, 100
 
 
     cout << "====== 数组名称, 指针运算符方式访问元素 ======" << endl;
-    cout << *student_scores << endl;                          // 100
-    cout << *(student_scores + 1) << endl;                    // 98
-    cout << *(student_scores + 2) << endl;                    // 99
+    cout << *student_scores << endl;                                 // 100
+    cout << *(student_scores + 1) << endl;                           // 98
+    cout << *(student_scores + 2) << endl;                           // 99
 
 
     cout << "====== ++ 运算符 ======" << endl;
@@ -56,8 +65,8 @@ int main()
 
 
     return 0;
-}
 
+}
 
 
 
