@@ -1,6 +1,14 @@
+/*
+代理构造函数
+    重载的构造函数很相似
+    冗余的代码可能会导致错误
+    C++ 允许使用代理构造函数
+        在一个构造函数中初始化列表调用另一个构造函数
+
+*/
+
 #include<iostream>
 #include<string>
-
 
 using namespace std;
 
@@ -33,22 +41,23 @@ void Account :: printInfo()
 
 
 
-// 代理构造函数 初始化列表
+// 没有参数的构造函数
 Account :: Account()                                   
-    : Account {"none", 0.0}                                 // 花括号进行初始化
+    : Account {"none", 0.0}                                 // 初始化列表, 调用两个参数的Account函数, 即调用  Account(string name, double balance)
     {
 
     }
 
 
+// 1个参数的构造函数
 Account :: Account(string name)
-    : Account {name, 0.0}                                   // 花括号进行初始化
+    : Account {name, 0.0}                                   // 初始化列表, 调用两个参数的Account函数, 即调用  Account(string name, double balance)
     {
 
     }
 
 
-// 构造函数初始化列表
+// 2个参数的构造函数
 Account :: Account(string name, double balance)
     : name {name}, balance {balance}
     {
@@ -58,15 +67,16 @@ Account :: Account(string name, double balance)
 
 
 
+// 主函数
 int main()
 {
-    Account alice_account;                                 // 调用过程: Account :: Account() --> Account :: Account(string name, double balance)
+    Account alice_account;                                     // 调用Account(), 调用Account(string name, double balance)
     alice_account.printInfo();                      
 
-    Account jobs_account {"Job's account"};                // 这里使用 () 也能正常运行
+    Account jobs_account {"Job's account"};                    // 调用 Account(string name), 调用Account(string name, double balance)
     jobs_account.printInfo();
 
-    Account bill_account {"Bill's account", 1230.0};
+    Account bill_account {"Bill's account", 1230.0};           // 调用 Account(string name, double balance)
     bill_account.printInfo();
 
 
