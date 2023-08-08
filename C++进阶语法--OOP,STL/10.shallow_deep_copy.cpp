@@ -1,3 +1,12 @@
+/*
+            浅拷贝与深拷贝
+如果不提供自己写的copy constructor, 编译器会生成默认的
+    将目标对象的值逐个拷贝过来
+    如果是指针, 拷贝的值(指向的地址), 而不是指向的对象(浅拷贝)
+    在析构函数中释放内存时, 其他对象中的指针可能还在指向被释放的资源
+
+*/
+
 #include<iostream>
 #include<string>
 #include<vector>
@@ -13,7 +22,7 @@ private:
     double *balance {nullptr};
 
 public:
-    double get_balance() {return *balance;};              // 获取余额
+    double get_balance() {return *balance;};              // 获取余额, 返回解引用后的值
     string get_name() {return name;};                     // 获取名字
 
 
@@ -43,7 +52,7 @@ Account :: Account(string name, double balance)
 Account :: Account(const Account &source)
     {
         this -> name = source.name;
-        // this -> balance = source.balance;                   // 浅拷贝
+        // this -> balance = source.balance;                   // 浅拷贝, 两个指针指向同一个区域, 在 释放时会报错(默认的拷贝函数就是这样)
         this -> balance = new double {*source.balance};        // 深拷贝
         cout << "拷贝构造函数被调用, 是" << source.name << "的拷贝" << endl;
     }
@@ -62,6 +71,7 @@ Account :: ~Account()
 
 
 
+// 主函数
 int  main()
 {
     // 演示深拷贝与浅拷贝
@@ -72,3 +82,8 @@ int  main()
     return 0;
 
 }
+
+
+
+
+
