@@ -91,14 +91,14 @@ int main()
 
     printAccountInfo(alice_account);                         // 值传递方式传递对象给函数, 调用拷贝函数, 在调用打印函数, 最后调用 Account :: ~Account()
 
+
     // 2.基于已存在的对象创建新的对象
+    Account Alice_account {"Alice account", 1000.0};      // 调用构造函数
 
-    // Account alice_account {"Alice account", 1000.0};      // 调用构造函数
-
-    // Account new_account {alice_account};                  // 调用拷贝函数,  后入先出进行销毁函数, 调用析构函数(调用两个析构函数)
+    Account new_account {Alice_account};                  // 调用拷贝函数, 结束调用: Account new_account析构函数
 
 
-    return 0;                                                // 程序结束, 需要对 Account alice_account 销毁, 最后调用 Account :: ~Account()                                           
+    return 0;                                             // Account Alice_account调用析构函数, Account alice_account调用析构函数                              
 
 }
 
