@@ -1,3 +1,19 @@
+/*
+            拷贝构造函数
+当对象被拷贝时, C++ 必须从已存在的对象复制出一个新的对象
+
+何时使用拷贝构造函数？
+    以值传递方式传递对象给函数(作参数)
+    函数以值方式返回对象
+    使用已存在的对象复制新的对象
+
+拷贝构造函数(函数名 和 类名 一样)的声明
+
+Student :: Student(const  Student &source);
+Account :: Account(const Account &source);
+
+*/
+
 #include<iostream>
 #include<string>
 #include<vector>
@@ -13,11 +29,11 @@ private:
     double balance{0.0};
 
 public:
-    string getName() { return name; }               // 获取 name
-    double getBalance() { return balance; }         // 获取 balance
+    string getName() { return name; }                           // 获取 name
+    double getBalance() { return balance; }                     // 获取 balance
 
-    // 构造函数
-    Account(string name = "none", double balance = 0.0);
+    // 构造函数, 函数名 和 类名 一样
+    Account(string name = "none", double balance = 0.0);        // 增加默认的初始值, 这样main()中的Account alice_account就不会报错
 
     // 析构函数
     ~Account();
@@ -44,19 +60,13 @@ Account :: ~Account()
 }
 
 
-// 拷贝构造函数: 根据已存在的对象属性来更新新对象的属性(name, balance)
-// Account :: Account(const Account &source)
-// {
-//     this -> name = source.name;
-//     this -> balance = source.balance;
 
-// }
-
-
-// 拷贝构造函数
+// 拷贝构造函数: 根据已存在对象的属性来更新新对象的属性(name, balance)
 Account :: Account(const Account &source)
     : name {source.name}, balance {source.balance}
     {
+        this -> name = source.name;                                            // source.name已存在对象, this -> name 新对象、
+        this -> balance = source.balance;
         cout << "拷贝构造函数被调用, 是" << source.name << "的拷贝" << endl;
 
     }
@@ -71,26 +81,26 @@ void printAccountInfo(Account acc)
 
 
 
+// 主函数
 int main()
 {
     // 1.值传递的方式给函数传递参数
-    // Account alice_account;                         // 调用构造函数,
+    Account alice_account;                                   // 调用构造函数 Account :: Account(string name, double balance)
 
-    // cout << "=============" << endl;
+    cout << "=============" << endl;
 
-    // printAccountInfo(alice_account);               // 调用拷贝函数, 调用打印函数, acc需要销毁, 然后调用析构函数, 最后调用 alice_account 析构函数
+    printAccountInfo(alice_account);                         // 值传递方式传递对象给函数, 调用拷贝函数, 在调用打印函数, 最后调用 Account :: ~Account()
 
     // 2.基于已存在的对象创建新的对象
 
-    Account alice_account {"Alice account", 1000.0};  // 调用构造函数
+    // Account alice_account {"Alice account", 1000.0};      // 调用构造函数
 
-    Account new_account {alice_account};              // 调用拷贝函数,  后入先出进行销毁函数, 调用析构函数(调用两个析构函数)
+    // Account new_account {alice_account};                  // 调用拷贝函数,  后入先出进行销毁函数, 调用析构函数(调用两个析构函数)
 
 
-    return 0;
+    return 0;                                                // 程序结束, 需要对 Account alice_account 销毁, 最后调用 Account :: ~Account()                                           
 
 }
-
 
 
 
